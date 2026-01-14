@@ -41,7 +41,7 @@ jobs:
       name: Load available actions
       id: load-actions
       with: 
-        PAT: ${{ secrets.PAT }}
+        PAT: ${{ steps.generate-token.outputs.token }}
         user: ${{ github.repository_owner }}
         fetchReadmes: true
         
