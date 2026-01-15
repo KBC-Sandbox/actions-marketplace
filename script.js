@@ -222,7 +222,8 @@ function init() {
         console.log('found file with content' + response);
         var jsonFileToUrl = response;
         // Add cache-busting timestamp to prevent stale data
-        var cacheBustedUrl = jsonFileToUrl + '?v=' + new Date().getTime();
+        var separator = jsonFileToUrl.indexOf('?') === -1 ? '?' : '&';
+        var cacheBustedUrl = jsonFileToUrl + separator + 'v=' + new Date().getTime();
 
         loadFile(cacheBustedUrl, true, function(response) {
             var json = JSON.parse(response);
