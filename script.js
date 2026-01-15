@@ -221,8 +221,11 @@ function init() {
     loadFile(jsonFileToUrl, false, function(response) {
         console.log('found file with content' + response);
         var jsonFileToUrl = response;
+        // Add cache-busting timestamp to prevent stale data
+        var separator = jsonFileToUrl.indexOf('?') === -1 ? '?' : '&';
+        var cacheBustedUrl = jsonFileToUrl + separator + 'v=' + new Date().getTime();
 
-        loadFile(jsonFileToUrl, true, function(response) {
+        loadFile(cacheBustedUrl, true, function(response) {
             var json = JSON.parse(response);
             var mainElement = document.getElementById('main');
             var actionCountElement = document.getElementById('actionCount');
