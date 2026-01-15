@@ -228,8 +228,10 @@ function initDetail() {
 
     loadFile(jsonFileToUrl, false, function(response) {
         var jsonFileToUrl = response;
+        // Add cache-busting timestamp to prevent stale data
+        var cacheBustedUrl = jsonFileToUrl + '?v=' + new Date().getTime();
 
-        loadFile(jsonFileToUrl, true, function(response) {
+        loadFile(cacheBustedUrl, true, function(response) {
             var json = JSON.parse(response);
             var action = null;
             
